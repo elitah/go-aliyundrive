@@ -52,7 +52,7 @@ func (r *FileService) UploadFile(ctx context.Context, request *UploadFileReq) (*
 		)
 		reader := progressbar.NewReader(file, bar)
 		return r.UploadStream(ctx, request.DriveID, request.ParentID, path.Base(fileInfo.Name()), io.Reader(&reader), fileInfo.Size())
-	} 
+	}
 	return r.UploadStream(ctx, request.DriveID, request.ParentID, path.Base(fileInfo.Name()), file, fileInfo.Size())
 }
 

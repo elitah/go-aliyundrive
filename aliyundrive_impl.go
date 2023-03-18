@@ -20,8 +20,6 @@ import (
 	"os"
 
 	"github.com/chyroc/gorequests"
-
-	"github.com/chyroc/go-aliyundrive/internal/helper_config"
 )
 
 type AliyunDrive struct {
@@ -32,6 +30,8 @@ type AliyunDrive struct {
 	// config
 	workDir string // defalut: ~/.go-aliyundrive-sdk
 	store   Store
+
+	headerSet func(*RawRequestReq, map[string]string)
 
 	// session
 	session *gorequests.Session
@@ -51,9 +51,6 @@ func newClient(options []ClientOptionFunc) *AliyunDrive {
 	r := &AliyunDrive{
 		// logger
 		logLevel: LogLevelTrace,
-
-		// timeout:      time.Second * 3,
-		session: gorequests.NewSession(helper_config.CookieFile),
 
 		// config
 		workDir: home + "/.go-aliyundrive-sdk",

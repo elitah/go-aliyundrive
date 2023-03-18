@@ -17,6 +17,8 @@ package aliyundrive
 
 import (
 	"path/filepath"
+
+	"github.com/chyroc/gorequests"
 )
 
 func New(options ...ClientOptionFunc) *AliyunDrive {
@@ -45,6 +47,18 @@ func WithWorkDir(dir string) ClientOptionFunc {
 func WithStore(store Store) ClientOptionFunc {
 	return func(ins *AliyunDrive) {
 		ins.store = store
+	}
+}
+
+func WithSession(session *gorequests.Session) ClientOptionFunc {
+	return func(ins *AliyunDrive) {
+		ins.session = session
+	}
+}
+
+func WithHeaderSet(headerSet func(*RawRequestReq, map[string]string)) ClientOptionFunc {
+	return func(ins *AliyunDrive) {
+		ins.headerSet = headerSet
 	}
 }
 

@@ -171,6 +171,10 @@ func (r *AliyunDrive) prepareHeaders(ctx context.Context, req *RawRequestReq) (m
 		headers["Authorization"] = "Bearer " + token.AccessToken
 	}
 
+	if nil != r.headerSet {
+		r.headerSet(req, headers)
+	}
+
 	return headers, nil
 }
 
